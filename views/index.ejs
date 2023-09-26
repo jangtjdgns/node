@@ -1,15 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>메인</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
+
 <body>
-    <button type="button" onclick="location.href='/todoList'">할 일 목록</button>
-    <h1>환영합니다. Booker입니다.</h1>
-    <h2><%= name %>님 안녕하세요.</h2>
+    <h1>프로젝트 노드 연동 테스트</h1>
+    <br>
+
+    <p>user1 id = <%= user[0].id %></p>
+    <p>user1 pw = <%= user[0].password %></p>
+
+    <a href="/allDR">전체토론방</a>
 </body>
+
 </html>
