@@ -41,15 +41,19 @@ li {
     justify-content: space-evenly;
 }
 
-.select-discussion-rooms>button {
+.select-discussion-rooms>form{
+    width: 30%;
+}
+
+.select-discussion-rooms button {
     border: 1px solid;
     border-radius: 5px;
     background-color: #F9ECDB;
-    width: 30%;
+    width: 100%;
     height: 50px;
 }
 
-.select-discussion-rooms>button:hover {
+.select-discussion-rooms button:hover {
     background-color: #e4d2bc;
 }
 

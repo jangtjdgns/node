@@ -21,18 +21,40 @@ app.listen(3000, () => {
 
 // 메인
 app.get("/", function (req, res) {
-    connection.query('SELECT * from Users', (error, rows) => {
-        if (error) throw error;
-        console.log('User info is: ', rows);
-        console.log(rows[0].id, rows[0].password);
-        res.render("index", { user: rows });
-    });
-
-    // res.render("index");
+    res.render("index");
 });
 
 /* 토론방 */
 // 전체 토론방
-app.get("/allDR", function (req, res) {
-    res.render("discussion-room");
+app.post("/DR", function (req, res) {
+
+    const val = req.body.dr;
+
+    console.log(val);
+
+    if (val === 'all') {
+        connection.query('SELECT * from discussion_rooms', (error, discussionRooms) => {
+            drConnect("all", error, discussionRooms, res);
+        });
+    } else if (val === 'rec') {
+        connection.query('SELECT * from discussion_rooms WHERE `field` = "요리"', (error, discussionRooms) => {
+            drConnect("rec", error, discussionRooms, res);
+        });
+    } else if (val === 'my') {
+        connection.query('SELECT * from discussion_rooms WHERE id > 5', (error, discussionRooms) => {
+            drConnect("my", error, discussionRooms, res);
+        });
+    }
 });
+
+// 토론방 연결 함수
+function drConnect(val, error, discussionRooms, res) {
+    var rooms = [];
+    if (error) throw error;
+
+    for (var room of discussionRooms) {
+        rooms.push(room);
+    }
+
+    res.render("discussion-room", { val, rooms: rooms });
+}

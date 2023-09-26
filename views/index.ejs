@@ -5,16 +5,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>메인</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script>
+        $(function () {
+            $("form button").click(function () {
+                var $input = $("form input");
+
+                if ($(this).index() === 1) {
+                    $input.val("all");
+                } else if ($(this).index() === 2) {
+                    $input.val("rec");
+                } else {
+                    $input.val("my");
+                }
+            });
+        });
+    </script>
 </head>
 
 <body>
     <h1>프로젝트 노드 연동 테스트</h1>
     <br>
 
-    <p>user1 id = <%= user[0].id %></p>
-    <p>user1 pw = <%= user[0].password %></p>
-
-    <a href="/allDR">전체토론방</a>
+    <form action="/DR" method="post">
+        <input name="dr" type="hidden">
+        <button type="submit">전체 토론방</button>
+        <button type="submit">추천 토론방</button>
+        <button type="submit">내 토론방</button>
+    </form>
 </body>
 
 </html>

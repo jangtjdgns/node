@@ -17,10 +17,33 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
     <script>
         $(function () {
-            // 테스트용 방 생성
-            for (var i = 0; i < 10; i++) {
-                $(".user-rooms-wrap").append(`<ul><li>${i + 1}</li><li>방이름${i + 1}</li><li>방장이름${i + 1}</li></ul>`)
+            var $input = $(".select-discussion-rooms input");
+
+            var btnIdx = 0;         // 버튼 index
+
+            if($input.val() === 'all'){
+                btnIdx = 0;
+            } else if($input.val() === 'rec'){
+                btnIdx = 1;
+            } else {
+                btnIdx = 2;
             }
+            
+            console.log($(".select-discussion-rooms button").eq(btnIdx).text());
+
+            $(".select-discussion-rooms button").eq(btnIdx).css("backgroundColor", "#e4d2bc");
+
+
+            $(".select-discussion-rooms button").click(function () {
+                
+                if ($(this).index() === 1) {
+                    $input.val("all");
+                } else if ($(this).index() === 2) {
+                    $input.val("rec");
+                } else {
+                    $input.val("my");
+                }
+            });
         });
     </script>
 </head>
@@ -31,9 +54,12 @@
         <article class="discussion-rooms-article">
             <!-- 토론방 선택 -->
             <div class="select-discussion-rooms">
-                <button>전체 토론방</button>
-                <button>추천 토론방</button>
-                <button>내 토론방</button>
+                <form action="/DR" method="post">
+                    <input name="dr" type="hidden" value="<%= val %>">
+                    <button type="submit">전체 토론방</button>
+                    <button type="submit">추천 토론방</button>
+                    <button type="submit">내 토론방</button>
+                </form>
             </div>
 
             <!-- 토론방 타이틀 모음 -->
@@ -49,7 +75,24 @@
             <!-- 토론방 목록 -->
             <div class="discussion-rooms-list">
                 <div class="user-rooms-wrap">
-                    <!-- 테스트용 -->
+                    <% if(rooms.length==0){ %>
+                        <p>현재 생성된 방이 없습니다.</p>
+                        <% } else { %>
+                            <!-- 방 생성 -->
+                            <% for(var room of rooms){ %>
+                                <ul>
+                                    <li>
+                                        <%= room.id %>
+                                    </li>
+                                    <li>
+                                        <%= room.room_name %>
+                                    </li>
+                                    <li>
+                                        <%= room.room_admin %>
+                                    </li>
+                                </ul>
+                                <% } %>
+                                    <% } %>
                 </div>
             </div>
         </article>
