@@ -7,6 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>할 일 목록</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .liTitle {
+            text-decoration: none;
+            color: black;
+            margin-left: 10px;
+        }
+    </style>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
         crossorigin="anonymous"></script>
@@ -14,8 +21,6 @@
 </head>
 
 <body>
-    <button type="button" onclick="location.href='/'">메인가기</button>
-
     <!-- <% if(items.length===0){ %>
         <p>할 일 목록이 존재하지 않습니다.</p>
         <% } else { %>
@@ -43,7 +48,7 @@
                         <ul class="list-group">
                             <%for (var item of items) {%>
                                 <li class="list-group-item">
-                                    <% if(item.subscribe===true){ %>
+                                    <% if(item.subscribe===false){ %>
                                         <button type="button" id="subscribe<%= item.id %>"
                                             class="btn btn-outline-primary"
                                             onclick="subscribe('<%= item.id %>')">구독</button>
@@ -52,21 +57,22 @@
                                                 class="btn btn-outline-primary"
                                                 onclick="subscribe('<%= item.id %>')">구독중</button>
                                             <% }%>
-                                                <%= item.title%>
-                                                    <button class="btn btn-secondary btn-sm float-end ms-2"
-                                                        onclick="showEditForm('<%= item.id %>')">수정</button>
-                                                    <button type="submit" class="btn btn-danger btn-sm float-end"
-                                                        onclick="deleteItem('<%= item.id %>')">삭제</button>
-                                                    <!-- 수정 form -->
-                                                    <div id="editForm<%= item.id %>" class="d-none mt-2">
-                                                        <form action="/edit" method="POST">
-                                                            <input type="hidden" name="id" value="<%= item.id %>">
-                                                            <input type="text" name="editedItem" class="form-control"
-                                                                placeholder="수정할 데이터를 입력해주세요." required />
-                                                            <button class="btn btn-primary mt-2"
-                                                                type="submit">저장</button>
-                                                        </form>
-                                                    </div>
+                                                <a href="/detail/<%= item.id %>" class="liTitle">
+                                                    <%= item.title%>
+                                                </a>
+                                                <button class="btn btn-secondary btn-sm float-end ms-2"
+                                                    onclick="showEditForm('<%= item.id %>')">수정</button>
+                                                <button type="submit" class="btn btn-danger btn-sm float-end"
+                                                    onclick="deleteItem('<%= item.id %>')">삭제</button>
+                                                <!-- 수정 form -->
+                                                <div id="editForm<%= item.id %>" class="d-none mt-2">
+                                                    <form action="/edit" method="POST">
+                                                        <input type="hidden" name="id" value="<%= item.id %>">
+                                                        <input type="text" name="editedItem" class="form-control"
+                                                            placeholder="수정할 데이터를 입력해주세요." required />
+                                                        <button class="btn btn-primary mt-2" type="submit">저장</button>
+                                                    </form>
+                                                </div>
                                 </li>
                                 <% } %>
                         </ul>
@@ -96,7 +102,7 @@
         }
 
         function subscribe(titleId) {
-            $(`#subscribe${titleId}`).text() == "구독" ? $(`#subscribe${titleId}`).text("구독중") : $(`#subscribe${titleId}`).text("구독");
+            $(`#subscribe${titleId}`).text() == "구독" ? $(`#subscribe${titleId}`).text("구독") : $(`#subscribe${titleId}`).text("구독중");
 
             $.ajax({
                 type: "POST",

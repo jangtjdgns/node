@@ -10,18 +10,32 @@
 </head>
 
 <body>
-    <button type="button" onclick="location.href='/'">메인가기</button>
-    <button type="button" onclick="location.href='/todoList'">취소</button>
     <div class="container">
         <h1 class="mt-5">Todo App</h1>
         <div class="row mt-4">
             <div class="col-md-6">
                 <h2>할 일 추가</h2>
+                <!-- action="/경로"  method="POST"-> 전송 방식 -->
                 <form action="/write" method="POST">
                     <div class="input-group mb-3">
+                        <!-- name="title", title이란 name이 지정되어있어야 서버에서 받을 수 있음 -->
                         <input name="title" type="text" class="form-control" placeholder="Enter item" required />
-                        <button class="btn btn-primary" type="submit">추가</button>
                     </div>
+                    <div class="input-group mb-3">
+                        <textarea name="contents" class="form-control" id="exampleFormControlTextarea1" rows="3"
+                            required></textarea>
+                    </div>
+                    <div class="input-group mb-3">
+                        <select name="rank" class="form-select" aria-label="Default select example">
+                            <option selected value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                            <option value="4">Four</option>
+                            <option value="5">Five</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-primary" type="submit">추가</button>
+                    <button class="btn btn-secondary" type="button" onclick="location.href='/todoList'">취소</button>
                 </form>
             </div>
         </div>
