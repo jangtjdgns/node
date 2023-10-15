@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>작성</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <h2>컬럼 추가</h2>
+                <!-- action="/경로"  method="POST"-> 전송 방식 -->
+                <form action="/column/write" method="POST">
+                    <div class="input-group mb-3">
+                        <input name="title" type="text" class="form-control" placeholder="Enter item" required />
+                    </div>
+                    <div class="input-group mb-3">
+                        <input name="author" class="form-control" placeholder="글쓴이" required></input>
+                    </div>
+                    <button class="btn btn-primary" type="submit">추가</button>
+                    <button class="btn btn-secondary" type="button" onclick="location.href='/column/list'">취소</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

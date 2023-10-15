@@ -38,7 +38,7 @@
 
     <div class="container">
         <h1 class="mt-5">Todo App</h1>
-        <button class="btn btn-primary" type="button" onclick="location.href='/write'">추가</button>
+        <button class="btn btn-primary" type="button" onclick="location.href='/todo/write'">추가</button>
         <div class="row mt-4">
             <div class="col-md-6">
                 <h2>할 일 목록</h2>
@@ -57,7 +57,7 @@
                                                 class="btn btn-outline-primary"
                                                 onclick="subscribe('<%= item.id %>')">구독중</button>
                                             <% }%>
-                                                <a href="/detail/<%= item.id %>" class="liTitle">
+                                                <a href="/todo/detail/<%= item.id %>" class="liTitle">
                                                     <%= item.title%>
                                                 </a>
                                                 <button class="btn btn-secondary btn-sm float-end ms-2"
@@ -66,7 +66,7 @@
                                                     onclick="deleteItem('<%= item.id %>')">삭제</button>
                                                 <!-- 수정 form -->
                                                 <div id="editForm<%= item.id %>" class="d-none mt-2">
-                                                    <form action="/edit" method="POST">
+                                                    <form action="/todo/edit" method="POST">
                                                         <input type="hidden" name="id" value="<%= item.id %>">
                                                         <input type="text" name="editedItem" class="form-control"
                                                             placeholder="수정할 데이터를 입력해주세요." required />
@@ -89,7 +89,7 @@
         function deleteItem(titleId) {
             $.ajax({
                 type: "POST",
-                url: '/delete',
+                url: '/todo/delete',
                 data: { id: titleId },
                 success: function (results) {
                     console.log("성공");
@@ -106,7 +106,7 @@
 
             $.ajax({
                 type: "POST",
-                url: '/subscribe',
+                url: '/todo/subscribe',
                 data: { id: titleId },
                 success: function (results) {
                     console.log("성공");

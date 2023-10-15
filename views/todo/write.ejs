@@ -16,7 +16,7 @@
             <div class="col-md-6">
                 <h2>할 일 추가</h2>
                 <!-- action="/경로"  method="POST"-> 전송 방식 -->
-                <form action="/write" method="POST">
+                <form action="/todo/write" method="POST">
                     <div class="input-group mb-3">
                         <!-- name="title", title이란 name이 지정되어있어야 서버에서 받을 수 있음 -->
                         <input name="title" type="text" class="form-control" placeholder="Enter item" required />
@@ -35,7 +35,7 @@
                         </select>
                     </div>
                     <button class="btn btn-primary" type="submit">추가</button>
-                    <button class="btn btn-secondary" type="button" onclick="location.href='/todoList'">취소</button>
+                    <button class="btn btn-secondary" type="button" onclick="location.href='/todo/list'">취소</button>
                 </form>
             </div>
         </div>
